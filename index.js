@@ -24,12 +24,21 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
-
     const toysCollection = client.db("toyCars").collection("toys");
 
     app.get("/toys", async (req, res) => {
       const cursor = toysCollection.find().limit(20);
       const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    app.get("/my-toys", async (req, res) => {
+      let query = {};
+      if (req.query?.email) {
+        query = {sellerEmail: req.query.email};
+      }
+      const result = await toysCollection.find(query).toArray();
+      console.log(result);
       res.send(result);
     });
 
