@@ -41,6 +41,13 @@ async function run() {
       res.send(result);
     });
 
+    app.post("/toys", async (req, res) => {
+      const booking = req.body;
+      console.log(booking);
+      const result = await toysCollection.insertOne(booking);
+      res.send(result);
+    });
+
     app.delete("/my-toys/:id", async (req, res) => {
       const id = req.params.id;
       const query = {_id: new ObjectId(id)};
