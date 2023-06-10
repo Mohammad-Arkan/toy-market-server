@@ -32,6 +32,13 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/toys/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)};
+      const result = await toysCollection.findOne(query);
+      res.send(result);
+    });
+
     app.get("/my-toys", async (req, res) => {
       let query = {};
       if (req.query?.email) {
@@ -42,9 +49,8 @@ async function run() {
     });
 
     app.post("/toys", async (req, res) => {
-      const booking = req.body;
-      console.log(booking);
-      const result = await toysCollection.insertOne(booking);
+      const toy = req.body;
+      const result = await toysCollection.insertOne(toy);
       res.send(result);
     });
 
