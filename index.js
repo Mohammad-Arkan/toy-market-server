@@ -87,7 +87,7 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Toy Marketplace Server");
+  res.send("Toy Marketplace Server Is Working");
 });
 
 app.listen(port, () => {
